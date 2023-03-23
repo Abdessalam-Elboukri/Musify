@@ -14,9 +14,8 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserApp {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,14 +27,32 @@ public class UserApp {
     private Boolean isBanned;
     private Boolean isSubscribed;
     private LocalDateTime createdAt;
-    @Enumerated(EnumType.STRING)
+
+    @ManyToOne
     private CountryList country;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private List<Role> roles = new ArrayList<>();
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
 
     @OneToMany(mappedBy = "userApp", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private List<Payment> payments;

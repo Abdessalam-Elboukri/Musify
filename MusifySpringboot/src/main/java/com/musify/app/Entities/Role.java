@@ -3,6 +3,8 @@ package com.musify.app.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +20,13 @@ public class Role {
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
-    List<UserApp> users = new ArrayList<>();
+    private List<UserApp> users = new ArrayList<>();
+
+    public Role(long id, String roleName) {
+        this.id=id;
+        this.roleName=roleName;
+    }
+
 
     public String getRoleName() {
         return roleName;
