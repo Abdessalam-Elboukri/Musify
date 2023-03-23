@@ -2,10 +2,10 @@ package com.musify.app.Services.Imp;
 
 import com.musify.app.Entities.Role;
 import com.musify.app.Entities.UserApp;
+import com.musify.app.Repositories.RoleRepository;
 import com.musify.app.Repositories.UserRepository;
 import com.musify.app.Services.UserService;
-import com.musify.app.Utils.Dto.UserAppDto;
-import com.musify.app.Utils.Mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,8 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -25,9 +27,9 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    PasswordEncoder passwordEncoder;
+     PasswordEncoder passwordEncoder;
     @Autowired
-    UserMapper userMapper;
+     RoleRepository roleRepository;
 
 
     @Override
@@ -41,28 +43,34 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserAppDto register(UserAppDto userAppDto) throws IllegalAccessException {
-        if(userAppDto==null){
+    public UserApp register(UserApp userApp) throws IllegalAccessException {
+        if(userApp==null){
             throw
                     new IllegalAccessException("Please fill Your information");
         }
-        else if(userAppDto.getEmail()==null ||
-                userAppDto.getPassword()==null ||
-                userAppDto.getCountry()==null ||
-                userAppDto.getPhone()==null ||
-                userAppDto.getUserName()==null ){
+        else if(userApp.getEmail()==null ||
+                userApp.getPassword()==null ||
+                userApp.getCountry()==null ||
+                userApp.getPhone()==null ||
+                userApp.getUserName()==null ){
             throw
                     new IllegalAccessException("Please fill all information");
         }
-        UserApp user = userMapper.toEntity(userAppDto);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setBanned(false);
-        user.setSubscribed(false);
-        Role userRole=new Role(1,"user");
-        user.getRoles().add(userRole);
-        userRole.getUsers().add(user);
-        user=userRepository.save(user);
-        return userMapper.toDto(user);
+        userApp.setCreatedAt(LocalDateTime.now());
+        userApp.setPassword(passwordEncoder.encode(userApp.getPassword()));
+        userApp.setBanned(false);
+        userApp.setSubscribed(false);
+        Optional<Role> userRole= roleRepository.findById(1L);
+        if(userRole.isEmpty()){
+            System.out.println("==================");
+            throw new IllegalAccessException("role not found");
+
+        }else {
+            userApp.getRoles().add(userRole.get());
+        }
+        System.out.println(userRole.get().getRoleName()+"==================");
+        System.out.println(userApp);
+        return userRepository.save(userApp);
+
     }
 }

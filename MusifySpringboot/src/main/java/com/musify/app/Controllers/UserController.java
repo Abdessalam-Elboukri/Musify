@@ -1,11 +1,13 @@
 package com.musify.app.Controllers;
 
-import com.musify.app.Security.JwtUtils;
+import com.musify.app.Dto.AuthRequest;
+import com.musify.app.Dto.ResponseDto;
+import com.musify.app.Entities.UserApp;
+import com.musify.app.Middleware.JwtUtils;
 import com.musify.app.Services.UserService;
-import com.musify.app.Utils.Dto.AuthRequest;
-import com.musify.app.Utils.Dto.ResponseDto;
-import com.musify.app.Utils.Dto.UserAppDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,28 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
-    private final UserService userService;
-    private final JwtUtils jwtUtils;
-
-
-    public UserController(UserService userService,
-                          JwtUtils jwtUtils) {
-        this.userService = userService;
-        this.jwtUtils = jwtUtils;
-    }
+    @Autowired
+    UserService userService;
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    JwtUtils jwtUtils;
 
     @PostMapping("/singup")
-    public UserAppDto signup(@RequestBody UserAppDto userAppDto) throws IllegalAccessException {
-        if(userAppDto==null){
+    public UserApp signup(@RequestBody UserApp userApp) throws IllegalAccessException {
+        if(userApp==null){
             throw new IllegalAccessException("please fill all information");
         }else{
-            return userService.register(userAppDto);
+            return userService.register(userApp);
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<Object> auth(@RequestBody AuthRequest request){
-        //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
         UserDetails user = userService.findByEmail(request.getEmail());
         if(user != null) {
             System.out.println(jwtUtils.generateToken(user));

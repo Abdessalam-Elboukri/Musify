@@ -17,7 +17,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserApp {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String userName;
     private String email;
@@ -29,7 +29,7 @@ public class UserApp {
     private LocalDateTime createdAt;
 
     @ManyToOne
-    private CountryList country;
+    private Countries country;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role",
@@ -129,11 +129,29 @@ public class UserApp {
         this.createdAt = createdAt;
     }
 
-    public CountryList getCountry() {
+    public Countries getCountry() {
         return country;
     }
 
-    public void setCountry(CountryList country) {
+    public void setCountry(Countries country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "UserApp{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", isBanned=" + isBanned +
+                ", isSubscribed=" + isSubscribed +
+                ", createdAt=" + createdAt +
+                ", country=" + country +
+                ", roles=" + roles +
+                ", payments=" + payments +
+                '}';
     }
 }
