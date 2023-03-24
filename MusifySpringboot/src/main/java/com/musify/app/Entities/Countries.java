@@ -1,6 +1,9 @@
 package com.musify.app.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +19,12 @@ public class Countries {
     @OneToMany(mappedBy = "country")
     private List<UserApp> users = new ArrayList<>();
 
+    @JsonIgnore
     public List<UserApp> getUsers() {
         return users;
     }
 
+    @JsonSetter
     public void setUsers(List<UserApp> users) {
         this.users = users;
     }

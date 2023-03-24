@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album,Long> {
-
         Page<Album> findByAlbumNameContaining(String albumName, Pageable pageable);
 
 }

@@ -1,8 +1,10 @@
 package com.musify.app.Entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,9 +13,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@SuperBuilder
+@JsonInclude(NON_DEFAULT)
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserApp {
     @Id
@@ -37,6 +41,25 @@ public class UserApp {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
     private List<Role> roles = new ArrayList<>();
+
+
+    public UserApp() {
+    }
+
+    public UserApp(Long id, String userName, String email, String password, String phone, String avatar, Boolean isBanned, Boolean isSubscribed, LocalDateTime createdAt, Countries country, List<Role> roles, List<Payment> payments) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.avatar = avatar;
+        this.isBanned = isBanned;
+        this.isSubscribed = isSubscribed;
+        this.createdAt = createdAt;
+        this.country = country;
+        this.roles = roles;
+        this.payments = payments;
+    }
 
     public List<Role> getRoles() {
         return roles;

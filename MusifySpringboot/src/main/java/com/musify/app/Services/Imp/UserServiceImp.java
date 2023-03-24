@@ -5,8 +5,9 @@ import com.musify.app.Entities.UserApp;
 import com.musify.app.Repositories.RoleRepository;
 import com.musify.app.Repositories.UserRepository;
 import com.musify.app.Services.UserService;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,14 +15,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.data.domain.PageRequest.of;
+
 
 @Service
+@Slf4j
 public class UserServiceImp implements UserService {
 
     @Autowired
@@ -62,15 +65,16 @@ public class UserServiceImp implements UserService {
         userApp.setSubscribed(false);
         Optional<Role> userRole= roleRepository.findById(1L);
         if(userRole.isEmpty()){
-            System.out.println("==================");
             throw new IllegalAccessException("role not found");
-
         }else {
             userApp.getRoles().add(userRole.get());
         }
-        System.out.println(userRole.get().getRoleName()+"==================");
-        System.out.println(userApp);
         return userRepository.save(userApp);
 
+    }
+
+    @Override
+    public Page<UserApp> getUsers(String userName, int page, int size) {
+        return userRepository.findByUserNameContaining(userName, of(page, size));
     }
 }
