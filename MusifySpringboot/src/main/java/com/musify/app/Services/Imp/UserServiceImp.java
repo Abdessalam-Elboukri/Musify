@@ -77,4 +77,9 @@ public class UserServiceImp implements UserService {
     public Page<UserApp> getUsers(String userName, int page, int size) {
         return userRepository.findByUserNameContaining(userName, of(page, size));
     }
+
+    @Override
+    public UserApp _findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

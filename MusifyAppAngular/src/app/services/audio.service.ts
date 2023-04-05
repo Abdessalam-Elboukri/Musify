@@ -84,7 +84,6 @@ export class AudioService {
 
   private streamObservable(url: string) {
     return new Observable(observer => {
-      // Play audio
       this.audioObj.src = url;
       this.audioObj.load();
       this.audioObj.play();
@@ -143,8 +142,10 @@ export class AudioService {
     this.audioObj.volume = volume;
   }
 
-  formatTime(time: number, format: string = "HH:mm:ss") {
+  formatTime(time: number, format: string = "mm:ss") {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
   }
+
+
 }

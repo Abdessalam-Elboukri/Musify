@@ -31,9 +31,9 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/users/signup").hasAuthority("admin")
+                .antMatchers("/api/v1/users/signup").permitAll()
                 .antMatchers("/api/v1/users/login").permitAll()
-//                .antMatchers("/api/v1/owners/**").hasAuthority("OWNER")
+                //.antMatchers("/api/v1/users/all-users").hasAuthority("user")
 //                .antMatchers("/api/v1/admin/**").hasAuthority("ADMIN")
 //                .antMatchers("/api/v1/clients/**").hasAuthority("CLIENT")
                 .and()

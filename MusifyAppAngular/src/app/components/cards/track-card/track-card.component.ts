@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+
+declare var $: any;
 
 @Component({
   selector: 'app-track-card',
@@ -6,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./track-card.component.css']
 })
 export class TrackCardComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
 
 }

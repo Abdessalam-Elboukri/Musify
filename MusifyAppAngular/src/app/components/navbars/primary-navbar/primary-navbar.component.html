@@ -11,7 +11,7 @@
       </a>
     </div>
     <!--Player-->
-    <div id="mediaPlayer" class="player-bar col-lg-8 col-md-5" data-auto="true">
+    <div  class="player-bar col-lg-8 col-md-5" >
       <div class="row align-items-center grid">
         <div class="col">
           <div class="d-flex align-items-center">
@@ -19,18 +19,24 @@
               <i class="icon-back s-18"></i>
             </button>
             <button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing" class=" btn btn-link" id="play_">
-              <span  id="play"><i class="icon-play s-36"></i></span>
+              <span  ><i class="icon-play s-36"></i></span>
             </button>
             <button  (click)="pause()" *ngIf="state?.playing" class=" btn btn-link" id="pause_">
-              <span id="pause" ><i class="icon-pause s-36 text-primary"></i></span>
+              <span ><i class="icon-pause s-36 text-primary"></i></span>
             </button>
             <button [disabled]="isLastPlaying()" (click)="next()" id="nextTrack" class="btn btn-link d-none d-sm-block">
               <i class="icon-next s-18"></i>
             </button>
           </div>
         </div>
-        <div class="col-8 d-none d-lg-block">
-          <div id="waveform"></div>
+        <div class="col-8 d-lg-block">
+          <mat-toolbar >
+          <mat-toolbar-row class="d-flex justify-content-between" >
+            {{ state?.readableCurrentTime }}
+            <mat-slider style="width: 100%; "  [min]="stateInitialize" [step]="stepPlay" [max]="state?.duration" [disabled]="state?.error || currentFile.index === undefined" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" ></mat-slider>
+            {{ state?.readableDuration }}
+          </mat-toolbar-row>
+          </mat-toolbar>
         </div>
         <div class="col d-none d-lg-block">
           <small class="track-time mr-2 text-primary align-middle"></small>
@@ -48,10 +54,9 @@
 
         <!-- Right Sidebar Toggle Button -->
         <li class="searchOverlay-wrap">
-          <a href="#" id="btn-searchOverlay" class="nav-link mr-3 btn--searchOverlay no-ajaxy" style="margin-top: 4px">
-            <i class="icon icon-search s-24" ></i>
-          </a>
-
+          <span id="btn-searchOverlay" class="nav-link mt-1 mr-3 btn--searchOverlay ">
+            <i class="icon icon-search  s-24"></i>
+          </span>
         </li>
         <!-- User Account-->
         <li class="dropup custom-dropdown user user-menu ">

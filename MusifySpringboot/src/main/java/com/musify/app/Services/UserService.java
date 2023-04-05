@@ -9,4 +9,5 @@ public interface UserService {
     UserDetails findByEmail(String email);
     UserApp register(UserApp userApp) throws IllegalAccessException;
     Page<UserApp> getUsers(String userName, int page, int size);
+    UserApp _findByEmail(String email);
 }

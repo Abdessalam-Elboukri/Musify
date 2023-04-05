@@ -11,7 +11,7 @@
             <p>Join Our wonderful community and let others help you without a single
               penny</p>
           </header>
-          <form>
+          <form  #form="ngForm" (ngSubmit)="userRegister(form)">
             <div class="row">
               <div class="col-lg-6">
                 <div class="form-group">

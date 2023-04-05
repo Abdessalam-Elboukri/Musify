@@ -1,0 +1,88 @@
+<ng-container *ngIf="(usersState$ | async) as state" [ngSwitch]="state.appState">
+  <nav class="navbar navbar-expand-lg navbar-dark position-sticky top-0 ">
+    <div class="container">
+      <a class="navbar-brand primary" href="#">Musify</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.userName)" class="d-flex" role="search">
+          <input type="search" name="userName" ngModel class="form-control me-2" placeholder="Search users" aria-label="Search">
+          <input  class="btn btn-primary" type="submit" value="Search">
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-3">
+        <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
+        <ng-container *ngSwitchCase="'APP_LOADING'">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">.</span>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'APP_LOADED'">
+          <h3>User List</h3>
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Photo</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Status</th>
+              <th scope="col">Created At</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of state.appData.data.page.content; let i = index;">
+              <th scope="row">{{ user.id }}</th>
+              <td><img [src]="user.avatar" width="30" height="30" class="rounded-circle"
+                       [alt]="user.userName + ' \'s photo'"></td>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <td>
+                    <span class="badge" >
+                      <span>
+                        <p class="bg-success p-1" style="color: white" >{{user.isBanned}}</p>
+                      </span>
+
+                    </span>
+              </td>
+              <td>{{ user.createdAt }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
+            No users found
+          </div>
+          <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                <a  (click)="goToNextOrPreviousPage('backward', searchForm.value.userName)" class="page-link" aria-label="Previous">
+                  <span aria-hidden="true">Pre</span>
+                </a>
+              </li>
+              <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;"
+                  class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                <a (click)="gotToPage(searchForm.value.userName,i)" class="page-link">
+                  {{ i + 1 }}
+                </a>
+              </li>
+              <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+                <a  (click)="goToNextOrPreviousPage('forward', searchForm.value.userName)" class="page-link" aria-label="Next">
+                  <span aria-hidden="true">Next &raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>
