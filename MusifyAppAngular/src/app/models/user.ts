@@ -1,4 +1,7 @@
+import {Countries} from "./countries";
+
 export class UserApp{
+
       id: number;
       userName: string;
       email: string;
@@ -7,7 +10,8 @@ export class UserApp{
       phone: string;
       isBanned: boolean;
       isSubscribed: boolean;
-      country:string;
+      country:Countries;
       createdAt:Date;
+
 
 }

@@ -2,9 +2,11 @@ package com.musify.app.Controllers;
 
 import com.musify.app.Dto.AuthRequest;
 import com.musify.app.Dto.ResponseDto;
+import com.musify.app.Entities.Countries;
 import com.musify.app.Entities.HttpResponse;
 import com.musify.app.Entities.UserApp;
 import com.musify.app.Middleware.JwtUtils;
+import com.musify.app.Services.CountriesService;
 import com.musify.app.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +31,23 @@ public class UserController {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/singup")
-    public UserApp signup(@RequestBody UserApp userApp) throws IllegalAccessException {
+    @Autowired
+    CountriesService countriesService;
+
+    @PostMapping("/signup")
+    public ResponseDto signup(@RequestBody UserApp userApp) throws IllegalAccessException {
+
         if(userApp==null){
             throw new IllegalAccessException("please fill all information");
-        }else{
-            return userService.register(userApp);
         }
+        System.out.println(userApp.getCountry());
+        Countries country = countriesService.findByIso(userApp.getCountry().getIso());
+        if(country==null){
+            throw new IllegalAccessException("Something went wrong");
+        }
+            userApp.setCountry(country);
+            System.out.println("=============signup");
+            return new ResponseDto("200","Signup",userService.register(userApp)) ;
     }
 
     @PostMapping("/login")
