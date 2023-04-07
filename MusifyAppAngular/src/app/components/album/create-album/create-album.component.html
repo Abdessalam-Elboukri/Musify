@@ -35,8 +35,8 @@
         </figure>
         <div class="bottom-gradient"></div>
       </div>
-      <button class="my-2 w-100 p-1 justify-content-center py-2 d-flex align-items-center" style="background-image: url('assets/img/demo/v11.jpg'); border: none">
-        <span class="s-12 text-white">Add New Album<i class="ml-2 mt-1 icon-add-1"></i></span>
+      <button data-toggle="modal" data-target="#musicModal" class="my-2 w-100 p-1 justify-content-center py-2 d-flex align-items-center primary-color" style=" border: none">
+        <span class="s-12 text-white">Add New Album<i class="ml-2 mt-1 icon-add-3"></i></span>
       </button>
 
 
@@ -44,17 +44,16 @@
         <div>
           <div class="mr-3 float-left text-center">
             <div class="s-36">09</div>
-            <span>July</span>
+            <span>Tracks</span>
           </div>
           <div>
             <div>
-              <a href="events-single.html">
+              <a href="">
                 <h4 class="text-primary">New York park live</h4>
+                <div class="d-flex ">
+                  <small class="d-block mt-1">private</small>
+                </div>
               </a>
-            </div>
-            <small> 33 Cliveden Close, Melbourne VIC 3000, Australia</small>
-            <div class="mt-2">
-              <i class="icon-clock-o mr-1"> </i> 7:00 PM - 11:00 PM
             </div>
           </div>
         </div>
@@ -135,5 +134,9 @@
       </div>
     </div>
   </div>
+
 </section>
-<!--@PlayLIst & Events-->
+
+
+<app-add-album-modal></app-add-album-modal>
+

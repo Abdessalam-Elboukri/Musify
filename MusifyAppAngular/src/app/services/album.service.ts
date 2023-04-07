@@ -3,6 +3,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {UserApp} from "../models/user";
 import {Observable} from "rxjs";
+import {Album} from "../models/album";
 
 @Injectable({
   providedIn: 'root'
@@ -19,4 +20,11 @@ export class AlbumService {
   getAlbumsByArtist(ref:string):Observable<any>{
     return this.http.get(`${this.base_url}/getalbums-by-artist/${ref}`)
   }
+
+  //add album
+  addAlbum(albumData:FormData):Observable<any>{
+    return this.http.post(`${this.base_url}/add-album`,albumData)
+
+  }
+
 }

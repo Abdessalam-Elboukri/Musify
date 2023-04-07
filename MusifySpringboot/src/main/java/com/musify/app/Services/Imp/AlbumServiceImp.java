@@ -6,6 +6,7 @@ import com.musify.app.Services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class AlbumServiceImp implements AlbumService {
     AlbumRepository albumRepository;
 
     @Override
-    public Album saveAlbum(Album album) throws IllegalAccessException {
+    public Album saveAlbum(Album album, MultipartFile avatar) throws IllegalAccessException {
         if(album==null){
             throw new IllegalAccessException("Please fill all album's information");
         } else if(album.getAlbumAvatar()==null||
@@ -28,6 +29,7 @@ public class AlbumServiceImp implements AlbumService {
             throw new IllegalAccessException("Please fill all required fields");
         }
         album.setAlbumRefrence("album"+ UUID.randomUUID());
+
         album.setIs_private(true);
         return albumRepository.save(album);
     }

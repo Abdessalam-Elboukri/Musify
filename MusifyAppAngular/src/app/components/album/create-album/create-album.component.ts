@@ -10,7 +10,7 @@ export class CreateAlbumComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("search================")
+
   }
 
 }

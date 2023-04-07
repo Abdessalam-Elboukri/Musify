@@ -27,6 +27,7 @@ import { CreateAlbumComponent } from './components/album/create-album/create-alb
 import { AddTrackComponent } from './components/track/add-track/add-track.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {RecentPlayComponent} from "./components/track/recent-play/recent-play.component";
+import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-album-modal.component';
 
 
 
@@ -51,7 +52,8 @@ import {RecentPlayComponent} from "./components/track/recent-play/recent-play.co
     SingleAlbumComponent,
     CreateAlbumComponent,
     AddTrackComponent,
-    RecentPlayComponent
+    RecentPlayComponent,
+    AddAlbumModalComponent
   ],
   imports: [
     BrowserModule,

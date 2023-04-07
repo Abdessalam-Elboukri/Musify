@@ -46,15 +46,16 @@ public class AlbumController {
 
 
     @PostMapping("/add-album")
-    public ResponseDto addAlbum(@RequestPart("data") Album album,
+    public ResponseDto addAlbum(@RequestPart("album") Album album,
                                 @RequestParam("email")  String email,
-                                @RequestParam("albumAvatar")MultipartFile avatar) throws IllegalAccessException {
+                                @RequestParam("MyFile")MultipartFile avatar) throws IllegalAccessException {
         Artist artist = artistService.findByEmail(email);
         if(artist == null){
             return new ResponseDto("500","Error with your email.");
         }
+        System.out.println(album.getAlbumName());
         album.setArtist(artist);
-        return new ResponseDto("200", "album has been added with successfully", albumService.saveAlbum(album));
+        return new ResponseDto("200", "album has been added with successfully", albumService.saveAlbum(album,avatar));
 
     }
 
