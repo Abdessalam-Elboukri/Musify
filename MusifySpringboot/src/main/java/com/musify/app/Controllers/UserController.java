@@ -58,7 +58,7 @@ public class UserController {
             System.out.println(jwtUtils.generateToken(user));
             return ResponseEntity.ok(new ResponseDto("success","token",jwtUtils.generateToken(user)));
         }else
-            return ResponseEntity.status(400).body(new ResponseDto("bad request","user not found"));
+            return ResponseEntity.status(400).body(new ResponseDto("bad request","Your credentials are incorrect"));
     }
 
     @GetMapping("/all-users")
@@ -74,5 +74,16 @@ public class UserController {
                         .statusCode(OK.value())
                         .build());
 
+    }
+
+    @GetMapping("get-one/{email}")
+    public ResponseDto getByEmail(@PathVariable String email ){
+        UserApp user=userService._findByEmail(email);
+        if(user==null){
+            return new ResponseDto("500","no user found with that email");
+        }
+        else {
+            return new ResponseDto("200", "User Found", user);
+        }
     }
 }

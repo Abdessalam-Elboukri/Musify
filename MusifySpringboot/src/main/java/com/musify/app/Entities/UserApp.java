@@ -24,8 +24,11 @@ public class UserApp {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
     private String userName;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(unique = true, nullable = false)
     private String password;
+    @Column(unique = true, nullable = false)
     private String phone;
     private String avatar;
     private Boolean isBanned;

@@ -9,7 +9,7 @@ declare var $: any;
 })
 export class TrackCardComponent implements OnInit {
     ngOnInit(): void {
-        throw new Error('Method not implemented.');
+
     }
 
 }

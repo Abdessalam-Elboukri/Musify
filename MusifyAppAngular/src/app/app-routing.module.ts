@@ -35,6 +35,13 @@ const routes: Routes = [
       {path: "add-track", component: AddTrackComponent}
     ]
   },
+  {path : '',
+    component : DashLayoutComponent,
+    children:[
+      {path: "add-track", component: AddTrackComponent},
+      {path: "add-album", component:CreateAlbumComponent}
+    ]
+  },
 ];
 
 @NgModule({
