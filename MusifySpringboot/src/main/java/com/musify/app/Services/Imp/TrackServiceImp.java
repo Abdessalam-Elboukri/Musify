@@ -2,6 +2,7 @@ package com.musify.app.Services.Imp;
 
 import com.musify.app.Aws.StorageConstants;
 import com.musify.app.Aws.StorageService;
+import com.musify.app.Entities.Album;
 import com.musify.app.Entities.Track;
 import com.musify.app.Entities.UserApp;
 import com.musify.app.Repositories.TrackRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -63,5 +65,10 @@ public class TrackServiceImp implements TrackService {
     @Override
     public Page<Track> getTracks(String track, int page, int size) {
         return trackRepository.findTracksByTrackNameContaining(track, of(page,size));
+    }
+
+    @Override
+    public List<Track> getByAlbum(Album album) {
+        return trackRepository.findByAlbum(album);
     }
 }

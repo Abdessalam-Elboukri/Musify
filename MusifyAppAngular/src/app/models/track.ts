@@ -5,7 +5,10 @@ export class Track{
   id:number;
   trackName:string;
   trackReference:string;
-  trackUrl:FileHandler;
+  trackUrl:string;
   trackAvatar:string;
   createAt:Date;
+
+  trackFile:FileHandler;
+  trackImage:FileHandler
 }

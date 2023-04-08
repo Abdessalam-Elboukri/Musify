@@ -33,7 +33,7 @@ export class StorageService{
   public getUser():any{
     const token = localStorage.getItem(USER_KEY);
     if(token)
-      return JSON.parse(atob(token.split('.')[1])).sub
+      return JSON.parse(atob(token.split('.')[1]))
   }
 
 

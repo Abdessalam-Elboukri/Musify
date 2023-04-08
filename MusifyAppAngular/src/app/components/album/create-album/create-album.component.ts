@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AlbumService} from "../../../services/album.service";
+import {StorageService} from "../../../services/storage.service";
+import {TrackService} from "../../../services/track.service";
 
 @Component({
   selector: 'app-create-album',
@@ -7,10 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateAlbumComponent implements OnInit {
 
-  constructor() { }
+  email:string
+  albums:any
+  tracksByAlbums:any
+  constructor(private albumService:AlbumService,
+              private storageService:StorageService,
+              private trackService:TrackService) { }
 
   ngOnInit(): void {
+    this.email=this.storageService.getUserName()
+    this.getAlbumsByArtist()
+  }
 
+  getAlbumsByArtist(){
+    this.albumService.getAlbumsByArtist(this.email).subscribe((res)=>{
+      console.log(res);
+      this.albums=res.data
+      console.log(res.data[0].trackList[0].trackUrl);
+    })
+  }
+
+  getTracksByAlbum(ref:string){
+    this.trackService.getTracksByAlbums(ref).subscribe((res)=>{
+      console.log(res.data)
+      this.tracksByAlbums=res.data
+    })
   }
 
 }

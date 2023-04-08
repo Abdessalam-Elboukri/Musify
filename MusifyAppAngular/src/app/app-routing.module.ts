@@ -9,7 +9,6 @@ import {ListArtistsComponent} from "./components/artist/list-artists/list-artist
 import {DashLayoutComponent} from "./layouts/dash-layout/dash-layout.component";
 import {ListUsersComponent} from "./components/user/list-users/list-users.component";
 import {SingleAlbumComponent} from "./components/album/single-album/single-album.component";
-import {AddTrackComponent} from "./components/track/add-track/add-track.component";
 import {CreateAlbumComponent} from "./components/album/create-album/create-album.component";
 
 const routes: Routes = [
@@ -32,13 +31,11 @@ const routes: Routes = [
     component : DashLayoutComponent,
     children:[
       {path:"all-users" , component:ListUsersComponent},
-      {path: "add-track", component: AddTrackComponent}
     ]
   },
   {path : '',
     component : DashLayoutComponent,
     children:[
-      {path: "add-track", component: AddTrackComponent},
       {path: "add-album", component:CreateAlbumComponent}
     ]
   },

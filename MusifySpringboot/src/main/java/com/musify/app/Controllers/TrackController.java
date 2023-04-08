@@ -2,8 +2,10 @@ package com.musify.app.Controllers;
 
 
 import com.musify.app.Dto.ResponseDto;
+import com.musify.app.Entities.Album;
 import com.musify.app.Entities.HttpResponse;
 import com.musify.app.Entities.Track;
+import com.musify.app.Services.AlbumService;
 import com.musify.app.Services.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +26,9 @@ public class TrackController {
 
     @Autowired
     TrackService trackService;
+
+    @Autowired
+    AlbumService albumService;
 
     @Autowired
     private SimpMessagingTemplate template;
@@ -54,6 +59,15 @@ public class TrackController {
 
         String track1 = trackService.saveTrack(track,trackFile,trackAvatar);
         return  new ResponseDto("200", "track created successfully", track1);
+    }
+
+    @GetMapping("/get-by-album/{ref}")
+    public ResponseDto getTracksByAlbum(@PathVariable String ref){
+        Album album =albumService.getByReference(ref);
+        if(album==null){
+            return new ResponseDto("500", "Error in album Information");
+        }
+        return new ResponseDto("200", "success", trackService.getByAlbum(album));
     }
 
 }

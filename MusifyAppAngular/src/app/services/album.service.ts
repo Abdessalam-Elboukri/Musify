@@ -17,8 +17,8 @@ export class AlbumService {
 
 
   //getAlbumsByArtist
-  getAlbumsByArtist(ref:string):Observable<any>{
-    return this.http.get(`${this.base_url}/getalbums-by-artist/${ref}`)
+  getAlbumsByArtist(email:string):Observable<any>{
+    return this.http.get(`${this.base_url}/albums-by-artist/${email}`)
   }
 
   //add album

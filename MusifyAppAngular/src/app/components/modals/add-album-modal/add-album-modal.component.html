@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="musicModal" tabindex="-1" role="dialog" aria-labelledby="musicModalLabel" aria-hidden="true">
+<div class="modal fade" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="musicModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -17,7 +17,7 @@
           </div>
           <div class="form-group">
             <label for="musicImage"><i class="icon-image"></i> Album Image</label>
-            <input type="file" [(ngModel)]="album.albumAvatar" (change)="onFileChanged($event)" name="MyFile" class="form-control-file" id="musicImage">
+            <input type="file" [(ngModel)]="album.albumImage" (change)="onFileChanged($event)" name="MyFile" class="form-control-file" id="musicImage">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>

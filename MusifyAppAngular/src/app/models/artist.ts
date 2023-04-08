@@ -1,7 +1,7 @@
-import {User} from "./user";
+import {UserApp} from "./user";
 import {Album} from "./album";
 
-export class Artist extends User{
+export class Artist extends UserApp{
   artistReference:string;
   artistCategory:string;
   isArtist:boolean;

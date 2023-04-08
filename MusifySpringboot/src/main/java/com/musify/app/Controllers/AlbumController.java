@@ -55,7 +55,14 @@ public class AlbumController {
         }
         System.out.println(album.getAlbumName());
         album.setArtist(artist);
-        return new ResponseDto("200", "album has been added with successfully", albumService.saveAlbum(album,avatar));
+        return new ResponseDto("200", "album has been added successfully", albumService.saveAlbum(album,avatar));
+
+    }
+
+    @GetMapping("/albums-by-artist/{email}")
+    public ResponseDto getAlbumsByArtist(@PathVariable String email){
+        Artist artist = artistService.findByEmail(email);
+        return new ResponseDto("200", "album retrieved", albumService.getAlbumsByArtist(artist));
 
     }
 

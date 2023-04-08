@@ -24,10 +24,9 @@ import { TrackRowComponent } from './components/cards/track-row/track-row.compon
 import { AlbumCardComponent } from './components/cards/album-card/album-card.component';
 import { SingleAlbumComponent } from './components/album/single-album/single-album.component';
 import { CreateAlbumComponent } from './components/album/create-album/create-album.component';
-import { AddTrackComponent } from './components/track/add-track/add-track.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {RecentPlayComponent} from "./components/track/recent-play/recent-play.component";
 import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-album-modal.component';
+import { AddTrackModalComponent } from './components/modals/add-track-modal/add-track-modal.component';
 
 
 
@@ -51,9 +50,9 @@ import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-
     AlbumCardComponent,
     SingleAlbumComponent,
     CreateAlbumComponent,
-    AddTrackComponent,
     RecentPlayComponent,
-    AddAlbumModalComponent
+    AddAlbumModalComponent,
+    AddTrackModalComponent
   ],
   imports: [
     BrowserModule,

@@ -20,7 +20,7 @@ export class AddAlbumModalComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit(): void {
-    this.email=this.storageService.getUser()
+    this.email=this.storageService.getUserName()
     console.log(this.email)
   }
 
@@ -30,7 +30,7 @@ export class AddAlbumModalComponent implements OnInit {
       const fileHandler : FileHandler ={
         file : file
       }
-      this.album.albumAvatar=fileHandler;
+      this.album.albumImage=fileHandler;
     }
   }
 
@@ -41,8 +41,8 @@ export class AddAlbumModalComponent implements OnInit {
       new Blob([JSON.stringify(album)],{type:'application/json'}));
 
     formData.append('MyFile',
-      album.albumAvatar.file,
-      album.albumAvatar.file.name);
+      album.albumImage?.file,
+      album.albumImage.file.name);
 
     formData.append('email',
       this.email
@@ -55,7 +55,8 @@ export class AddAlbumModalComponent implements OnInit {
       const albumFormData=this.prepareFormData(this.album);
       console.log(albumFormData);
       this.albumService.addAlbum(albumFormData).subscribe((res)=>{
-        this.router.navigate(["your_hotels"])
+        console.log(res)
+        this.router.navigate(["add-album"])
       })
   }
 
