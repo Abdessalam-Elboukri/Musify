@@ -12,6 +12,7 @@ import {SingleAlbumComponent} from "./components/album/single-album/single-album
 import {CreateAlbumComponent} from "./components/album/create-album/create-album.component";
 import {AuthGuard} from "./components/auth/guard.guard";
 import {GuardRoleGuard} from "./components/auth/guard-role.guard";
+import {ProfileComponent} from "./components/user/profile/profile.component";
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
       {path:"all-albums" , component:ListAlbumsComponent},
       {path:"album/:ref" , component:SingleAlbumComponent},
       {path:"all-artists" , component:ListArtistsComponent},
+      {path:"profile", component: ProfileComponent}
 
 
     ]

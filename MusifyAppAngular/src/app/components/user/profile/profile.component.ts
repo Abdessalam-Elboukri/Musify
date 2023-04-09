@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../../services/user.service";
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  email:string
+  userData:any
+  constructor(private userService:UserService, private storageService:StorageService) { }
 
   ngOnInit(): void {
+    this.email=this.storageService.getUser().sub;
+    this.getUserProfile()
+  }
+
+  getUserProfile(){
+    this.userService.getOne(this.email).subscribe((res)=>{
+      this.userData=res.data
+      console.log(res)
+    })
   }
 
 }

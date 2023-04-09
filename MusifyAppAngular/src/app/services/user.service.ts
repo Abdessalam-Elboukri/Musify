@@ -23,7 +23,7 @@ export class UserService{
     return this.http.get<any>(`${this.base_url}/all-users?userName=${userName}&page=${page}&size=${size}`)
   }
 
-  getOne(email:string):Observable<UserApp>{
+  getOne(email:string):Observable<any>{
     return this.http.get<UserApp>(`${this.base_url}/get-one/${email}`)
   }
 
