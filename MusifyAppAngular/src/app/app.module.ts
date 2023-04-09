@@ -28,6 +28,7 @@ import {RecentPlayComponent} from "./components/track/recent-play/recent-play.co
 import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-album-modal.component';
 import { AddTrackModalComponent } from './components/modals/add-track-modal/add-track-modal.component';
 import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 
 
@@ -53,7 +54,8 @@ import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
     CreateAlbumComponent,
     RecentPlayComponent,
     AddAlbumModalComponent,
-    AddTrackModalComponent
+    AddTrackModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
