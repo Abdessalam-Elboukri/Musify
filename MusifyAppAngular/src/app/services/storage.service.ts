@@ -22,12 +22,7 @@ export class StorageService{
   }
 
   public getToken(): any {
-    const user = localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
+    return localStorage.getItem(USER_KEY);
   }
 
   public getUser():any{
@@ -41,10 +36,6 @@ export class StorageService{
     return this.getUser().authorities[0].authority;
   }
 
-
-  public getUserName():any{
-    return this.getUser().sub
-  }
 
 
   public isLoggedIn(): boolean {

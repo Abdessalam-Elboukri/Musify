@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends PagingAndSortingRepository<UserApp,Long> {
+public interface UserRepository extends JpaRepository<UserApp,Long> {
     UserApp findByEmail(String email);
     Page<UserApp> findByUserNameContaining(String userName, Pageable pageable);
 }

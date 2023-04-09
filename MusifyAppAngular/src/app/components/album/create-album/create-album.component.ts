@@ -18,7 +18,8 @@ export class CreateAlbumComponent implements OnInit {
               private trackService:TrackService) { }
 
   ngOnInit(): void {
-    this.email=this.storageService.getUserName()
+    this.email=this.storageService.getUser().sub
+    console.log(this.email)
     this.getAlbumsByArtist()
   }
 

@@ -8,7 +8,11 @@
             consectetur</p>
         </div>
         <div class="row has-items-overlay">
-          <app-album-card class="col-lg-3 col-md-3 col-sm-6 my-2"></app-album-card>
+          <app-album-card class="col-lg-3 col-md-3 col-sm-6 my-2"
+                *ngFor="let album of albums"
+                [statRef]="album.albumRefrence"
+                [stateName]="album.albumName"
+          ></app-album-card>
         </div>
       </section>
     </div>

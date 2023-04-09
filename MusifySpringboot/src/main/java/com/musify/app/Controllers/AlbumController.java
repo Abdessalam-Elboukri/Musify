@@ -51,7 +51,7 @@ public class AlbumController {
                                 @RequestParam("MyFile")MultipartFile avatar) throws IllegalAccessException {
         Artist artist = artistService.findByEmail(email);
         if(artist == null){
-            return new ResponseDto("500","Error with your email.");
+            return new ResponseDto("400","Error with your email.");
         }
         System.out.println(album.getAlbumName());
         album.setArtist(artist);
@@ -64,6 +64,15 @@ public class AlbumController {
         Artist artist = artistService.findByEmail(email);
         return new ResponseDto("200", "album retrieved", albumService.getAlbumsByArtist(artist));
 
+    }
+
+    @GetMapping("/get-by-reference/{ref}")
+    public ResponseDto getAlbumByReference(@PathVariable String ref){
+        Album album = albumService.getByReference(ref);
+        if(album==null){
+            return new ResponseDto("400","album not found");
+        }
+        return new ResponseDto("200", "album retrieved successfully", album);
     }
 
 

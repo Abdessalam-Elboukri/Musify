@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {UserApp} from "../models/user";
 import {Observable} from "rxjs";
-import {Album} from "../models/album";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +23,16 @@ export class AlbumService {
   addAlbum(albumData:FormData):Observable<any>{
     return this.http.post(`${this.base_url}/add-album`,albumData)
 
+  }
+
+  //
+  getAll():Observable<any>{
+    return this.http.get(`${this.base_url}/all-albums`)
+  }
+
+  //getAlbumByRef
+  getAlbumByRef(ref:string):Observable<any>{
+    return this.http.get(`${this.base_url}/get-by-reference/${ref}`)
   }
 
 }

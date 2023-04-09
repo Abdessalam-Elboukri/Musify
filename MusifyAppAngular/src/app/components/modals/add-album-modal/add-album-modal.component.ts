@@ -20,7 +20,7 @@ export class AddAlbumModalComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit(): void {
-    this.email=this.storageService.getUserName()
+    this.email=this.storageService.getUser()
     console.log(this.email)
   }
 

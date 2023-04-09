@@ -10,6 +10,8 @@ import {DashLayoutComponent} from "./layouts/dash-layout/dash-layout.component";
 import {ListUsersComponent} from "./components/user/list-users/list-users.component";
 import {SingleAlbumComponent} from "./components/album/single-album/single-album.component";
 import {CreateAlbumComponent} from "./components/album/create-album/create-album.component";
+import {AuthGuard} from "./components/auth/guard.guard";
+import {GuardRoleGuard} from "./components/auth/guard-role.guard";
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -18,23 +20,22 @@ const routes: Routes = [
   {path : '',
     component : PrimaryLayoutComponent,
     children:[
-      {path: 'play',component: CreateAlbumComponent},
       {path:"" , component:HomeComponent},
       {path:"all-albums" , component:ListAlbumsComponent},
-      {path:"albumid" , component:SingleAlbumComponent},
+      {path:"album/:ref" , component:SingleAlbumComponent},
       {path:"all-artists" , component:ListArtistsComponent},
 
 
     ]
   },
   {path : '',
-    component : DashLayoutComponent,
+    component : DashLayoutComponent, canActivate:[AuthGuard, GuardRoleGuard],data:{role:'admin'},
     children:[
       {path:"all-users" , component:ListUsersComponent},
     ]
   },
   {path : '',
-    component : DashLayoutComponent,
+    component : DashLayoutComponent, canActivate:[AuthGuard, GuardRoleGuard],data:{role:'artist'},
     children:[
       {path: "add-album", component:CreateAlbumComponent}
     ]

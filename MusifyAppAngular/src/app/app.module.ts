@@ -18,7 +18,7 @@ import { DashLayoutComponent } from './layouts/dash-layout/dash-layout.component
 import { ListArtistsComponent } from './components/artist/list-artists/list-artists.component';
 import { ListAlbumsComponent } from './components/album/list-albums/list-albums.component';
 import { ListUsersComponent } from './components/user/list-users/list-users.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { TrackRowComponent } from './components/cards/track-row/track-row.component';
 import { AlbumCardComponent } from './components/cards/album-card/album-card.component';
@@ -27,6 +27,7 @@ import { CreateAlbumComponent } from './components/album/create-album/create-alb
 import {RecentPlayComponent} from "./components/track/recent-play/recent-play.component";
 import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-album-modal.component';
 import { AddTrackModalComponent } from './components/modals/add-track-modal/add-track-modal.component';
+import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
 
 
 
@@ -62,7 +63,12 @@ import { AddTrackModalComponent } from './components/modals/add-track-modal/add-
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
