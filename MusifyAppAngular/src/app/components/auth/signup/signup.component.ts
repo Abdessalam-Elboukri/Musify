@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {UserApp} from "../../../models/user";
 import {CountriesService} from "../../../services/countries.service";
 import {Countries} from "../../../models/countries";
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-signup',
@@ -19,10 +20,14 @@ export class SignupComponent implements OnInit {
   ss:String
   constructor(private authService:AuthService,
               private router:Router,
-              private countryService:CountriesService
+              private countryService:CountriesService,
+              private storageService:StorageService,
               ) { }
 
   ngOnInit(): void {
+    if(this.storageService.isLoggedIn()){
+      this.router.navigate(['/'])
+    }
     this.countryService.getAllCountries().subscribe((e)=>{
       this.countries=e.data;
       console.log(this.countries)

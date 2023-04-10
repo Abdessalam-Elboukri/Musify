@@ -31,7 +31,7 @@ const routes: Routes = [
     ]
   },
   {path : '',
-    component : DashLayoutComponent, canActivate:[AuthGuard, GuardRoleGuard],data:{role:'admin'},
+    component : DashLayoutComponent,
     children:[
       {path:"all-users" , component:ListUsersComponent},
     ]

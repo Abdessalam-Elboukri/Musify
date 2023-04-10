@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {Album} from "../../../models/album";
 import {AlbumService} from "../../../services/album.service";
 import {StorageService} from "../../../services/storage.service";
@@ -7,6 +7,7 @@ import {FileHandler} from "../../../interfaces/file-handler";
 import {NgForm} from "@angular/forms";
 import {Track} from "../../../models/track";
 import {TrackService} from "../../../services/track.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-add-track-modal',
@@ -18,9 +19,11 @@ export class AddTrackModalComponent implements OnInit {
 
   track:Track=new Track();
   albumRef:string
+  display:string
   constructor(private trackService:TrackService,
               private storageService:StorageService,
-              private router:Router) { }
+              private router:Router,
+              private location:Location) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +42,7 @@ export class AddTrackModalComponent implements OnInit {
   getAlbumRef(ref:string){
     this.albumRef=ref
   }
+
 
   prepareFormData(track:Track): FormData{
     const formData = new FormData();
@@ -67,8 +71,9 @@ export class AddTrackModalComponent implements OnInit {
     const trackFormData=this.prepareFormData(this.track);
     this.trackService.addTrack(trackFormData).subscribe((res)=>{
       console.log(res)
-      this.router.navigate(["/add-album"])
     })
+
+    window.location.reload()
   }
 
 
