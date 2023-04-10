@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { AudioService } from "../../../services/audio.service";
-import { CloudService } from "../../../services/cloud.service";
-import { StreamState } from "../../../interfaces/stream-state";
+import { Component, OnInit} from '@angular/core';
+import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router'
+import {AudioService} from "../../../services/audio.service";
+import {CloudService} from "../../../services/cloud.service";
+import {StreamState} from "../../../interfaces/stream-state";
 
 @Component({
   selector: 'app-primary-navbar',
@@ -12,6 +13,8 @@ export class PrimaryNavbarComponent implements OnInit {
   files: Array<any> = [];
   state: StreamState | undefined;
   currentFile: any = {};
+  stateInitialize=0
+  stepPlay=1
 
   constructor(public audioService: AudioService,
               public cloudService: CloudService) {
@@ -19,6 +22,8 @@ export class PrimaryNavbarComponent implements OnInit {
     cloudService.getFiles().subscribe(files => {
       this.files = files;
     });
+
+
 
     // listen to stream state
     this.audioService.getState().subscribe(state => {
@@ -59,7 +64,7 @@ export class PrimaryNavbarComponent implements OnInit {
     });
   }
 
-  openFile(file: { url: any; }, index: number) {
+  openFile(file: { url: any}, index: number) {
     this.currentFile = { index, file };
     this.audioService.stop();
     this.playStream(file.url);
@@ -88,5 +93,8 @@ export class PrimaryNavbarComponent implements OnInit {
     const index = this.currentFile.index - 1;
     const file = this.files[index];
     this.openFile(file, index);
+  }
+  isPlaying(){
+    return this.state.playing == true;
   }
 }

@@ -53,12 +53,10 @@ public class UserController {
     public ResponseEntity<HttpResponse>getUsers(@RequestParam Optional<String> userName,
                                                 @RequestParam Optional<Integer> page,
                                                 @RequestParam Optional<Integer> size) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3);
-        //throw new RuntimeException("Forced exception for testing");
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(now().toString())
-                        .data(of("page", userService.getUsers(userName.orElse(""), page.orElse(0), size.orElse(4))))
+                        .data(of("page", userService.getUsers(userName.orElse(""), page.orElse(0), size.orElse(10))))
                         .message("Users Retrieved")
                         .status(OK)
                         .statusCode(OK.value())

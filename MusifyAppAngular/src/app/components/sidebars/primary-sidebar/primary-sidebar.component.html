@@ -1,24 +1,24 @@
-<aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
-  <div class="sidebar">
+<aside class="main-sidebar fixed text-start  shadow" style="width: 50px; padding-top: 80px; ">
+  <div class="sidebar" style="padding: 1px 10px">
     <ul class="sidebar-menu">
-      <li><a class="ajaxifyPage active" href="">
-        <i class="icon icon-home-1 s-24"></i> <span>Home</span>
+      <li><a class="active" [routerLink]="['/']">
+        <i class="icon icon-home-1 s-24"></i> <span class="mt-1">Home</span>
       </a>
       </li>
-      <li><a class="ajaxifyPage" href="test">
-        <i class="icon icon-layers-1 s-24"></i> <span>Categories</span>
+      <li><a class="ajaxifyPage" [routerLink]="['all-albums']">
+        <i class="icon icon-layers-1 s-24"></i> <span class="mt-1">Categories</span>
       </a>
       <li>
-      <li><a class="ajaxifyPage" href="albums.html">
-        <i class="icon icon-windows s-24"></i> <span>Albums</span>
+      <li><a class="ajaxifyPage" [routerLink]="['albumid']">
+        <i class="icon icon-windows s-24"></i> <span class="mt-1">Albums</span>
       </a>
       <li>
-      <li><a class="ajaxifyPage" href="videos.html">
-        <i class="icon icon-video-player-2 s-24"></i> <span>Videos</span>
+      <li><a class="ajaxifyPage" routerLink='albumid'>
+        <i class="icon icon-video-player-2 s-24"></i> <span class="mt-1">Videos</span>
       </a>
       </li>
       <li><a class="ajaxifyPage" href="events.html">
-        <i class="icon icon-calendar-6 s-24"></i> <span>Events</span>
+        <i class="icon icon-calendar-6 s-24"></i> <span class="mt-1">Events</span>
       </a>
       </li>
 

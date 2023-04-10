@@ -24,17 +24,17 @@ public class StorageService {
     @Autowired
     private AmazonS3 s3Client;
 
-    public String uploadFile(MultipartFile file) {
+    public String uploadFile(MultipartFile file,String path) {
         File fileObj = convertMultiPartFileToFile(file);
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
+        s3Client.putObject(new PutObjectRequest(bucketName+path, fileName, fileObj));
         fileObj.delete();
         return "File uploaded : " + fileName;
     }
 
 
-    public byte[] downloadFile(String fileName) {
-        S3Object s3Object = s3Client.getObject(bucketName, fileName);
+    public byte[] downloadFile(String fileName,String path) {
+        S3Object s3Object = s3Client.getObject(bucketName+path, fileName);
         S3ObjectInputStream inputStream = s3Object.getObjectContent();
         try {
             byte[] content = IOUtils.toByteArray(inputStream);
@@ -46,8 +46,8 @@ public class StorageService {
     }
 
 
-    public String deleteFile(String fileName) {
-        s3Client.deleteObject(bucketName, fileName);
+    public String deleteFile(String fileName,String path) {
+        s3Client.deleteObject(bucketName+path, fileName);
         return fileName + " removed ...";
     }
 

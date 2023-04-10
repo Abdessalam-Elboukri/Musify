@@ -1,1 +1,9 @@
-<p>dash-layout works!</p>
+<div id="app">
+  <app-search></app-search>
+  <app-primary-sidebar></app-primary-sidebar>
+  <main id="pageContent" class="page has-sidebar">
+    <div class="container-fluid relative animatedParent animateOnce no-p">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>

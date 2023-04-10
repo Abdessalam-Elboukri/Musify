@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 public class StorageConstants {
 
-    static final String PrimaryBucket="musify-app-bucket";
-    static final String tracksFolder="";
-    static final String userAvatar="";
-    static final String tracksAlbumsAvatar="";
-    static final String otherFiles="";
+    public static final String PrimaryBucket="musify-app-bucket";
+    public static final String TRACKS_FOLDER="tracks_folder";
+    public static final String userAvatar="";
+    public static final String TRACKS_ALBUMS_AVATAR="avatar_folder";
+    public static final String otherFiles="";
 }

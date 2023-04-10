@@ -20,11 +20,12 @@ public class Album {
     private String albumName ;
     private String albumRefrence;
     private String albumAvatar;
+    private Boolean is_private;
     @ManyToOne
     private Artist artist;
 
     @OneToMany(mappedBy = "album")
-    List<Track> trackList= new ArrayList<>();
+    private List<Track> trackList= new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,5 +67,21 @@ public class Album {
     @JsonSetter
     public void setArtist(Artist artist) {
         this.artist = artist;
+    }
+
+    public Boolean getIs_private() {
+        return is_private;
+    }
+
+    public void setIs_private(Boolean is_private) {
+        this.is_private = is_private;
+    }
+
+    public List<Track> getTrackList() {
+        return trackList;
+    }
+
+    public void setTrackList(List<Track> trackList) {
+        this.trackList = trackList;
     }
 }

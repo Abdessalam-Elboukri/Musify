@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,6 @@ public class Track {
     private String trackUrl;
     private String trackAvatar;
     private LocalDateTime createAt;
-    private Time trackTime;
     @ManyToOne
     private Album album;
 
@@ -88,14 +86,6 @@ public class Track {
 
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
-    }
-
-    public Time getTrackTime() {
-        return trackTime;
-    }
-
-    public void setTrackTime(Time trackTime) {
-        this.trackTime = trackTime;
     }
 
     @JsonIgnore
