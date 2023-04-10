@@ -50,19 +50,20 @@ public class TrackController {
     }
 
     @PostMapping(value = {"/add-track"},consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public ResponseDto createTrack(@PathVariable String albumRef,
-                                    @RequestBody Track track,
-                                   @RequestPart("TrackFile") MultipartFile trackFile,
-                                   @RequestPart("TrackAvatar") MultipartFile trackAvatar) throws IllegalAccessException {
+    public ResponseDto createTrack(@RequestParam String albumRef,
+                                   @RequestPart Track track,
+                                   @RequestParam("trackFile") MultipartFile trackFile,
+                                   @RequestParam("trackImage") MultipartFile trackImage) throws IllegalAccessException {
         if(track==null){
-            return new ResponseDto("500", "Please fill all track information");
+            return new ResponseDto("400", "Please fill all track information");
         }
+        System.out.println(albumRef+"================");
         Album album = albumService.getByReference(albumRef);
         if(album==null){
             return new ResponseDto("400", "Album that you choose ,not found");
         }
         track.setAlbum(album);
-        String track1 = trackService.saveTrack(track,trackFile,trackAvatar);
+        String track1 = trackService.saveTrack(track,trackFile,trackImage);
         return  new ResponseDto("200", "track created successfully", track1);
     }
 

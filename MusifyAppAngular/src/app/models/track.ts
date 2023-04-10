@@ -8,6 +8,7 @@ export class Track{
   trackUrl:string;
   trackAvatar:string;
   createAt:Date;
+  albumRef:string;
 
   trackFile:FileHandler;
   trackImage:FileHandler

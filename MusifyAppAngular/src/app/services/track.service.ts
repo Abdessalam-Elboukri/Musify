@@ -18,4 +18,9 @@ export class TrackService {
   getTracksByAlbums(ref: string): Observable<any> {
     return this.http.get(`${this.base_url}/get-by-album/${ref}`)
   }
+
+
+  addTrack(trackData:FormData):Observable<any>{
+    return this.http.post(`${this.base_url}/add-track`,trackData)
+  }
 }

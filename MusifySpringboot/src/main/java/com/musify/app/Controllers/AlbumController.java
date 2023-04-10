@@ -53,7 +53,7 @@ public class AlbumController {
         if(artist == null){
             return new ResponseDto("400","Error with your email.");
         }
-        System.out.println(album.getAlbumName());
+        System.out.println(avatar.getSize());
         album.setArtist(artist);
         return new ResponseDto("200", "album has been added successfully", albumService.saveAlbum(album,avatar));
 

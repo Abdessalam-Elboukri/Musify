@@ -9,21 +9,21 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" #form="ngForm" (ngSubmit)="addTrack(form)"  enctype="multipart/form-data">
+        <form method="post" #form="ngForm" (click)="getAlbumRef(stateName)" (ngSubmit)="addTrack(form)"  enctype="multipart/form-data">
           <div class="form-group">
             <label for="albumName"><i class="icon-music"></i> Album Name</label>
-            <input type="text" class="form-control" id="albumName" [value]="stateName" [(ngModel)]="track.trackName" name="albumName"  placeholder="Enter album name">
+            <input type="text" class="form-control" id="albumName"  [(ngModel)]="track.trackName" name="albumName"  placeholder="Enter album name">
           </div>
           <div class="form-group">
             <label for="musicImage"><i class="icon-image"></i> Track Image</label>
-            <input type="file" [(ngModel)]="track.trackImage" (change)="onFileChanged($event)" name="TrackImage" class="form-control-file" id="musicImage">
+            <input type="file" [(ngModel)]="track.trackImage" (change)="onFileChanged($event)" name="trackImage" class="form-control-file" id="musicImage">
           </div>
 
           <div class="form-group">
             <label for="musicFile"><i class="icon-image"></i> Track File</label>
-            <input type="file" [(ngModel)]="track.trackFile" (change)="onFileChanged($event)" name="TrackFile" class="form-control-file" id="musicFile">
+            <input type="file" [(ngModel)]="track.trackFile" (change)="onFileChanged($event)" name="trackFile" class="form-control-file" id="musicFile">
           </div>
-          <input type="hidden" [value]="stateName">
+          {{stateName}}
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>
             <button type="submit" class="btn btn-primary s-14"><i class=""></i> Add track</button>

@@ -41,17 +41,18 @@ public class TrackServiceImp implements TrackService {
         if(track==null){
             throw new IllegalAccessException("Please fill all track's Information");
         }
-        else if(track.getTrackAvatar()==null||
+        else if(
                 track.getTrackName()==null||
                 track.getAlbum()==null
     ){
             throw new IllegalAccessException("Please fill all Required fields");
         }
         try {
-            storageService.uploadFile(trackAvatar,aws_s3_trackAvatar_path);
-            String fileName=storageService.uploadFile(trackFile, aws_s3_trackFile_path);
-            track.setTrackUrl(fileName);
-            track.setTrackReference("track"+ UUID.randomUUID());
+            //String avatarFileName=storageService.uploadFile(trackAvatar,aws_s3_trackAvatar_path);
+            //String fileName=storageService.uploadFile(trackFile, aws_s3_trackFile_path);
+            track.setTrackAvatar("test");
+            track.setTrackUrl("test");
+            track.setTrackReference("track"+"_"+ UUID.randomUUID());
             track.setCreateAt(LocalDateTime.now());
             trackRepository.save(track);
             return track.toString();

@@ -100,7 +100,9 @@
             <div class="tab-pane fade show active" id="w2-tab1" role="tabpanel"
                  aria-labelledby="w2-tab1">
               <div class="playlist pl-lg-3 pr-lg-3"  >
-                <app-track-row *ngFor="let track of tracksByAlbums " ></app-track-row>
+                <app-track-row *ngFor="let track of tracksByAlbums "
+                [stateName]="track.trackName"
+                ></app-track-row>
             </div>
           </div>
 

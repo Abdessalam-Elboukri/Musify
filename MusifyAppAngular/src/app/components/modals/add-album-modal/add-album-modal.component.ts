@@ -56,7 +56,7 @@ export class AddAlbumModalComponent implements OnInit {
       console.log(albumFormData);
       this.albumService.addAlbum(albumFormData).subscribe((res)=>{
         console.log(res)
-        this.router.navigate(["add-album"])
+        this.router.navigate(["/add-album"])
       })
   }
 
