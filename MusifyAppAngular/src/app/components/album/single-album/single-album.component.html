@@ -1,0 +1,75 @@
+<main id="pageContent" class="page has-sidebar">
+  <div class="container-fluid relative animatedParent animateOnce p-0">
+    <div class=" ">
+      <!--Banner-->
+      <section class="relative" data-bg-possition="center"
+               style="background-image:url('assets/img/demo/b3.jpg');">
+        <div class="has-bottom-gradient">
+          <div class="row pt-5 ml-lg-5 mr-lg-5">
+            <div class="col-md-10 offset-1">
+              <div class="row my-5 pt-5">
+                <div class="col-md-3">
+                  <img src="assets/img/demo/a1.jpg" alt="/">
+                </div>
+                <div class="col-md-9">
+                  <div class="d-md-flex align-items-center justify-content-between">
+                    <h1 class="my-3 text-white ">Where We Belong</h1>
+                    <div class="ml-auto mb-2">
+                      <a href="#" class="snackbar" data-text="Bookmark clicked"
+                         data-pos="top-right"
+                         data-showAction="true"
+                         data-actionText="ok"
+                         data-actionTextColor="#fff"
+                         data-backgroundColor="#0c101b"><i class="icon-bookmark s-24"></i></a>
+                      <a href="#" class="snackbar ml-3" data-text="You like this song"
+                         data-pos="top-right"
+                         data-showAction="true"
+                         data-actionText="ok"
+                         data-actionTextColor="#fff"
+                         data-backgroundColor="#0c101b"><i class="icon-heart s-24"></i></a>
+                      <a href="#" class="snackbar ml-3" data-text="Thanks for sharing"
+                         data-pos="top-right"
+                         data-showAction="true"
+                         data-actionText="ok"
+                         data-actionTextColor="#fff"
+                         data-backgroundColor="#0c101b"><i class="icon-share-1 s-24"></i></a>
+                    </div>
+                  </div>
+
+                  <div class="text-white my-2">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>Architecto atque
+                      aut blanditiis consectetur</p>
+                  </div>
+                  <div class="pt-3">
+                    <a href="#" class="btn btn-primary btn-lg">Buy Now At iTunes</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-gradient "></div>
+      </section>
+      <!--@Banner-->
+
+      <div class="p-3 p-lg-5">
+        <!--New Releases-->
+        <section>
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="playlist">
+                    <ul class="list-group">
+                      <app-track-row *ngFor="let file of files; let i = index "></app-track-row>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
