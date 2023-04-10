@@ -13,6 +13,8 @@ export class CreateAlbumComponent implements OnInit {
   email:string
   albums:any
   tracksByAlbums:any
+  trackRef:string
+  trackName:string
   constructor(private albumService:AlbumService,
               private storageService:StorageService,
               private trackService:TrackService) { }
@@ -35,7 +37,12 @@ export class CreateAlbumComponent implements OnInit {
     this.trackService.getTracksByAlbums(ref).subscribe((res)=>{
       console.log(res.data)
       this.tracksByAlbums=res.data
+      this.trackRef=ref
     })
+  }
+
+  getAlbumName(trackName:string){
+    this.trackName=trackName;
   }
 
 }

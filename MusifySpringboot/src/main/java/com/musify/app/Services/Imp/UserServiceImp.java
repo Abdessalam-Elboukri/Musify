@@ -70,7 +70,6 @@ public class UserServiceImp implements UserService {
             userApp.getRoles().add(userRole.get());
         }
         return userRepository.save(userApp);
-
     }
 
     @Override

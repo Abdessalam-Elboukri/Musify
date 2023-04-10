@@ -41,8 +41,8 @@
       <div class="w-100 ">
       <div class="mb-3 card p-3 cad-hover" *ngFor="let album of albums">
 
-        <div (click)="getTracksByAlbum(album.albumRefrence)">
-          <div class="mr-3 float-left text-center">
+        <div (click)="getTracksByAlbum(album.albumRefrence)" (click)="getAlbumName(album.albumName)">
+          <div class="mr-3 float-left text-center"  >
             <div class="s-36">{{album.trackList.length}}</div>
             <span>Tracks</span>
           </div>
@@ -79,7 +79,7 @@
                         <a class="nav-link active show" id="w2--tab1"
                            data-toggle="tab" href="#w2-tab1"
                            role="tab"
-                           aria-selected="true">Tracks</a>
+                           aria-selected="true">{{trackName}}</a>
                       </li>
                     </ul>
                   </div>
@@ -114,5 +114,5 @@
 
 
 <app-add-album-modal></app-add-album-modal>
-<app-add-track-modal></app-add-track-modal>
+<app-add-track-modal [stateName]="trackRef"></app-add-track-modal>
 

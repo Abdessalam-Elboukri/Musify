@@ -3,17 +3,17 @@
     <div class=" ">
       <!--Banner-->
       <section class="relative" data-bg-possition="center"
-               style="background-image:url('assets/img/demo/b3.jpg');">
+               style="{{url}}">
         <div class="has-bottom-gradient">
           <div class="row pt-5 ml-lg-5 mr-lg-5">
             <div class="col-md-10 offset-1">
               <div class="row my-5 pt-5">
                 <div class="col-md-3">
-                  <img src="assets/img/demo/a1.jpg" alt="/">
+                  <img src="{{data.albumAvatar}}" alt="/">
                 </div>
                 <div class="col-md-9">
                   <div class="d-md-flex align-items-center justify-content-between">
-                    <h1 class="my-3 text-white ">Where We Belong</h1>
+                    <h1 class="my-3 text-white ">{{data.albumName}}</h1>
                     <div class="ml-auto mb-2">
                       <a href="#" class="snackbar" data-text="Bookmark clicked"
                          data-pos="top-right"
@@ -41,7 +41,7 @@
                       aut blanditiis consectetur</p>
                   </div>
                   <div class="pt-3">
-                    <a href="#" class="btn btn-primary btn-lg">Buy Now At iTunes</a>
+                    <a href="#" class="btn btn-primary btn-lg">Add playlist</a>
                   </div>
                 </div>
               </div>
@@ -55,13 +55,33 @@
       <div class="p-3 p-lg-5">
         <!--New Releases-->
         <section>
-          <div class="row">
-            <div class="col-lg-10 offset-lg-1">
+          <div class="row  justify-content-center  mr-5" >
+            <div class="col-lg-9 offset-lg-1 " style="background-color: #0c101b">
               <div class="row">
                 <div class="col-md-12">
                   <div class="playlist">
                     <ul class="list-group">
-                      <app-track-row class="list-group-item my-1" *ngFor="let file of files; let i = index "></app-track-row>
+                      <div *ngFor="let song of songs; let i = index " (click)="openFile(song,i)">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <a class="no-ajaxy media-url">
+                            <i class="icon-play s-28 "></i>
+                          </a>
+                          <figure class="avatar-md float-left mr-3 mt-1">
+                            <img class="r-5" src="assets/img/demo/a1.jpg" alt="">
+                          </figure>
+                          <div class="d-flex  align-items-center">
+                            <h6 class="mr-4">{{song.trackName}}</h6>
+                            <small class="mt-1">(Atif Aslam)</small>
+                          </div>
+                          <span class="badge badge-primary badge-pill">  4:30 </span>
+                          <div class="d-flex align-items-center">
+                            <a href="#" class="ml-auto mr-3"><i class="icon-share-1"></i></a>
+                            <div class="ml-auto">
+                              <a href="#" class="btn btn-outline-primary btn-sm">Buy at iTunes</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </ul>
                   </div>
                 </div>

@@ -29,6 +29,7 @@ import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-
 import { AddTrackModalComponent } from './components/modals/add-track-modal/add-track-modal.component';
 import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
 import { ProfileComponent } from './components/user/profile/profile.component';
+import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/artist-sidebar.component';
 
 
 
@@ -55,7 +56,8 @@ import { ProfileComponent } from './components/user/profile/profile.component';
     RecentPlayComponent,
     AddAlbumModalComponent,
     AddTrackModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    ArtistSidebarComponent
   ],
   imports: [
     BrowserModule,

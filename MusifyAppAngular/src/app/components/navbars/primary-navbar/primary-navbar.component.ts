@@ -65,10 +65,10 @@ export class PrimaryNavbarComponent implements OnInit {
     });
   }
 
-  openFile(file: { url: any}, index: number) {
+  openFile(file: { trackUrl: any}, index: number) {
     this.currentFile = { index, file };
     this.audioService.stop();
-    this.playStream(file.url);
+    this.playStream(file.trackUrl);
   }
 
   pause() {

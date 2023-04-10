@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Album} from "../../../models/album";
 import {AlbumService} from "../../../services/album.service";
 import {StorageService} from "../../../services/storage.service";
@@ -16,14 +16,14 @@ export class AddTrackModalComponent implements OnInit {
 
 
   track:Track=new Track();
-  email:string;
+  albumRef:string;
   constructor(private trackService:AlbumService,
               private storageService:StorageService,
               private router:Router) { }
 
   ngOnInit(): void {
-    this.email=this.storageService.getUser()
-    console.log(this.email)
+    this.albumRef=this.storageService.getUser()
+    console.log(this.albumRef)
   }
 
   onFileChanged(event:any) {
@@ -50,8 +50,8 @@ export class AddTrackModalComponent implements OnInit {
       track.trackFile.file,
       track.trackFile.file.name);
 
-    formData.append('email',
-      this.email
+    formData.append('album',
+      this.albumRef
     )
     return formData;
   }
@@ -63,6 +63,16 @@ export class AddTrackModalComponent implements OnInit {
     this.trackService.addAlbum(albumFormData).subscribe((res)=>{
       this.router.navigate([""])
     })
+  }
+
+
+  private _stateName="";
+  @Input()
+  get stateName(): string{
+    return this._stateName;
+  }
+  set stateName(stateName:string){
+    this._stateName = stateName === undefined ? "" : stateName;
   }
 
 }
