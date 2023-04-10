@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="musicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="musicModalLabel">Add Music</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to add music -->
+        <form method="post" #form="ngForm" (ngSubmit)="addAlbum(form)"  enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="albumName"><i class="icon-music"></i> Album Name</label>
+            <input type="text" class="form-control" id="albumName" [(ngModel)]="album.albumName" name="albumName"  placeholder="Enter album name">
+          </div>
+          <div class="form-group">
+            <label for="musicImage"><i class="icon-image"></i> Album Image</label>
+            <input type="file" [(ngModel)]="album.albumImage" (change)="onFileChanged($event)" name="MyFile" class="form-control-file" id="musicImage">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Cancel</button>
+            <button type="submit" class="btn btn-primary s-14"><i class=""></i> Add Album</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

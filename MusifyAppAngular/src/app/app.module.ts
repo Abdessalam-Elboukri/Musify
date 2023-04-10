@@ -18,14 +18,20 @@ import { DashLayoutComponent } from './layouts/dash-layout/dash-layout.component
 import { ListArtistsComponent } from './components/artist/list-artists/list-artists.component';
 import { ListAlbumsComponent } from './components/album/list-albums/list-albums.component';
 import { ListUsersComponent } from './components/user/list-users/list-users.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { TrackRowComponent } from './components/cards/track-row/track-row.component';
 import { AlbumCardComponent } from './components/cards/album-card/album-card.component';
 import { SingleAlbumComponent } from './components/album/single-album/single-album.component';
 import { CreateAlbumComponent } from './components/album/create-album/create-album.component';
-import { AddTrackComponent } from './components/track/add-track/add-track.component';
-import { RecentPlayComponent } from './components/track/recent-play/recent-play.component';
+import {RecentPlayComponent} from "./components/track/recent-play/recent-play.component";
+import { AddAlbumModalComponent } from './components/modals/add-album-modal/add-album-modal.component';
+import { AddTrackModalComponent } from './components/modals/add-track-modal/add-track-modal.component';
+import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
+import { ProfileComponent } from './components/user/profile/profile.component';
+import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/artist-sidebar.component';
+
+
 
 @NgModule({
   declarations: [
@@ -47,8 +53,11 @@ import { RecentPlayComponent } from './components/track/recent-play/recent-play.
     AlbumCardComponent,
     SingleAlbumComponent,
     CreateAlbumComponent,
-    AddTrackComponent,
-    RecentPlayComponent
+    RecentPlayComponent,
+    AddAlbumModalComponent,
+    AddTrackModalComponent,
+    ProfileComponent,
+    ArtistSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,12 @@ import { RecentPlayComponent } from './components/track/recent-play/recent-play.
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

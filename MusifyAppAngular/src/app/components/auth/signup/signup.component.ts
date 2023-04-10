@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
+import {UserApp} from "../../../models/user";
+import {CountriesService} from "../../../services/countries.service";
+import {Countries} from "../../../models/countries";
+import {StorageService} from "../../../services/storage.service";
 
 @Component({
   selector: 'app-signup',
@@ -7,9 +14,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  countries:any;
+  user:UserApp = new UserApp();
+  country:Countries
+  ss:String
+  constructor(private authService:AuthService,
+              private router:Router,
+              private countryService:CountriesService,
+              private storageService:StorageService,
+              ) { }
 
   ngOnInit(): void {
+    if(this.storageService.isLoggedIn()){
+      this.router.navigate(['/'])
+    }
+    this.countryService.getAllCountries().subscribe((e)=>{
+      this.countries=e.data;
+      console.log(this.countries)
+    })
+  }
+
+
+  userRegister(form:NgForm){
+    this.country=new Countries(JSON.stringify(this.user.country).replace(/"/gi,""));
+    console.log(this.country)
+    console.log(this.user)
+    this.user.country=this.country
+    this.authService.signup(this.user).subscribe((res)=>{
+      this.router.navigate(["login"])
+    })
   }
 
 }

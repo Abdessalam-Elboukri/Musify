@@ -11,7 +11,7 @@
       </a>
     </div>
     <!--Player-->
-    <div id="mediaPlayer" class="player-bar col-lg-8 col-md-5" data-auto="true">
+    <div  class="player-bar col-lg-8 col-md-5" >
       <div class="row align-items-center grid">
         <div class="col">
           <div class="d-flex align-items-center">
@@ -29,11 +29,11 @@
             </button>
           </div>
         </div>
-        <div class="col-8 d-none d-lg-block">
-          <mat-toolbar color="primary">
-          <mat-toolbar-row class="d-flex justify-content-between">
+        <div class="col-8 d-lg-block">
+          <mat-toolbar >
+          <mat-toolbar-row class="d-flex justify-content-between" >
             {{ state?.readableCurrentTime }}
-            <mat-slider class="time-slider" [min]="stateInitialize" [step]="stepPlay" [max]="state?.duration" [disabled]="state?.error || currentFile.index === undefined" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" ></mat-slider>
+            <mat-slider style="width: 100%; "  [min]="stateInitialize" [step]="stepPlay" [max]="state?.duration" [disabled]="state?.error || currentFile.index === undefined" [value]="state?.currentTime" (input)="onSliderChangeEnd($event)" ></mat-slider>
             {{ state?.readableDuration }}
           </mat-toolbar-row>
           </mat-toolbar>

@@ -10,17 +10,6 @@ import {CloudService} from "../../../services/cloud.service";
 })
 export class RightSidebarComponent extends PrimaryNavbarComponent implements OnInit {
 
-  public override audioService: AudioService;
-
-  public override cloudService: CloudService;
-
-  constructor(audioService: AudioService,
-              cloudService: CloudService) {
-    super(audioService,cloudService);
-    this.cloudService = cloudService;
-    this.audioService = audioService;
-  }
-
   override ngOnInit(): void {
   }
 

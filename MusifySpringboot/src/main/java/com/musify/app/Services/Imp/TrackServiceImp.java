@@ -2,6 +2,7 @@ package com.musify.app.Services.Imp;
 
 import com.musify.app.Aws.StorageConstants;
 import com.musify.app.Aws.StorageService;
+import com.musify.app.Entities.Album;
 import com.musify.app.Entities.Track;
 import com.musify.app.Entities.UserApp;
 import com.musify.app.Repositories.TrackRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -39,17 +41,18 @@ public class TrackServiceImp implements TrackService {
         if(track==null){
             throw new IllegalAccessException("Please fill all track's Information");
         }
-        else if(track.getTrackAvatar()==null||
+        else if(
                 track.getTrackName()==null||
                 track.getAlbum()==null
     ){
             throw new IllegalAccessException("Please fill all Required fields");
         }
         try {
-            storageService.uploadFile(trackAvatar,aws_s3_trackAvatar_path);
-            String fileName=storageService.uploadFile(trackFile, aws_s3_trackFile_path);
-            track.setTrackUrl(fileName);
-            track.setTrackReference("track"+ UUID.randomUUID());
+            //String avatarFileName=storageService.uploadFile(trackAvatar,aws_s3_trackAvatar_path);
+            //String fileName=storageService.uploadFile(trackFile, aws_s3_trackFile_path);
+            track.setTrackAvatar("test");
+            track.setTrackUrl("test");
+            track.setTrackReference("track"+"_"+ UUID.randomUUID());
             track.setCreateAt(LocalDateTime.now());
             trackRepository.save(track);
             return track.toString();
@@ -63,5 +66,10 @@ public class TrackServiceImp implements TrackService {
     @Override
     public Page<Track> getTracks(String track, int page, int size) {
         return trackRepository.findTracksByTrackNameContaining(track, of(page,size));
+    }
+
+    @Override
+    public List<Track> getByAlbum(Album album) {
+        return trackRepository.findByAlbum(album);
     }
 }

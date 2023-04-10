@@ -43,6 +43,8 @@
           <div class="row has-items-overlay">
             <app-track-card  class="col-lg-2 col-md-3 col-sm-6 my-2"
               *ngFor="let file of files; let i = index " (click)="openFile(file, i)"
+                             [stateName]="file.name"
+                             [stateArtist]="file.artist"
             ></app-track-card>
           </div>
         </section>

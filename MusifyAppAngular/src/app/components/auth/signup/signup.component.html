@@ -11,26 +11,33 @@
             <p>Join Our wonderful community and let others help you without a single
               penny</p>
           </header>
-          <form>
+          <form  #form="ngForm" (ngSubmit)="userRegister(form)">
             <div class="row">
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="First Name">
+                  <input type="text" [(ngModel)]="user.userName" name="userName" class="form-control form-control-lg" placeholder="First Name">
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="Last Name">
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="Email Address">
+                  <input type="email" [(ngModel)]="user.email" class="form-control form-control-lg" name="email" placeholder="Email Address">
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" placeholder="Password">
+                  <input type="text" [(ngModel)]="user.phone" class="form-control form-control-lg" name="phone" placeholder="Phone Number">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <select class="form-control form-control-lg" name="country" [(ngModel)]="user.country">
+                    <option *ngFor="let country1 of countries" [value]="country1.iso">{{country1.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input type="text" [(ngModel)]="user.password" class="form-control form-control-lg" name="password" placeholder="Password">
                 </div>
               </div>
               <div class="col-lg-6">

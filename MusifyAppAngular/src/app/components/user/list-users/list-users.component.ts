@@ -3,8 +3,8 @@ import {UserService} from "../../../services/user.service";
 import {BehaviorSubject, catchError, map, Observable, of, startWith} from "rxjs";
 import {ApiResponse} from "../../../interfaces/api-response";
 import {Page} from "../../../interfaces/page";
-import {User} from "../../../interfaces/user";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UserApp} from "../../../models/user";
 
 @Component({
   selector: 'app-list-users',
@@ -13,8 +13,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ListUsersComponent implements OnInit {
 
-  usersState$: Observable<{ appState: string, appData?: ApiResponse<Page<User>>, error?: HttpErrorResponse }>;
-  responseSubject = new BehaviorSubject<ApiResponse<Page<User>>>(null);
+  usersState$: Observable<{ appState: string, appData?: ApiResponse<Page<UserApp>>, error?: HttpErrorResponse }>;
+  responseSubject = new BehaviorSubject<ApiResponse<Page<UserApp>>>(null);
   private currentPageSubject = new BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
 
@@ -22,7 +22,7 @@ export class ListUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersState$ = this.userService.getUsers().pipe(
-      map((response: ApiResponse<Page<User>>) => {
+      map((response: ApiResponse<Page<UserApp>>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(response.data.page.number);
         console.log(response);
@@ -39,7 +39,7 @@ export class ListUsersComponent implements OnInit {
 
   gotToPage(name?: string, pageNumber: number = 0): void {
     this.usersState$ = this.userService.getUsers(name, pageNumber).pipe(
-      map((response: ApiResponse<Page<User>>) => {
+      map((response: ApiResponse<Page<UserApp>>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
         console.log(response);

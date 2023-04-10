@@ -15,9 +15,9 @@ export class PrimaryNavbarComponent implements OnInit {
   currentFile: any = {};
   stateInitialize=0
   stepPlay=1
-
   constructor(public audioService: AudioService,
-              public cloudService: CloudService) {
+              public cloudService: CloudService
+  ) {
     // get media files
     cloudService.getFiles().subscribe(files => {
       this.files = files;
@@ -32,6 +32,7 @@ export class PrimaryNavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   //  this.playStream("https://www.thinknews.com.ng/wp-content/uploads/2021/10/Adele_-_Easy_On_Me_(thinknews.com.ng).mp3")
   }
 
   isFirstPlaying() {
@@ -64,10 +65,10 @@ export class PrimaryNavbarComponent implements OnInit {
     });
   }
 
-  openFile(file: { url: any}, index: number) {
+  openFile(file: { trackUrl: any}, index: number) {
     this.currentFile = { index, file };
     this.audioService.stop();
-    this.playStream(file.url);
+    this.playStream(file.trackUrl);
   }
 
   pause() {
@@ -97,4 +98,5 @@ export class PrimaryNavbarComponent implements OnInit {
   isPlaying(){
     return this.state.playing == true;
   }
+
 }

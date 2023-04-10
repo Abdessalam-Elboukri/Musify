@@ -9,10 +9,10 @@ import {ListArtistsComponent} from "./components/artist/list-artists/list-artist
 import {DashLayoutComponent} from "./layouts/dash-layout/dash-layout.component";
 import {ListUsersComponent} from "./components/user/list-users/list-users.component";
 import {SingleAlbumComponent} from "./components/album/single-album/single-album.component";
-import {CanDeactivateMusicPlayerGuard} from "./services/canDeactivate.service";
-import {PrimaryNavbarComponent} from "./components/navbars/primary-navbar/primary-navbar.component";
-import {AddTrackComponent} from "./components/track/add-track/add-track.component";
 import {CreateAlbumComponent} from "./components/album/create-album/create-album.component";
+import {AuthGuard} from "./components/auth/guard.guard";
+import {GuardRoleGuard} from "./components/auth/guard-role.guard";
+import {ProfileComponent} from "./components/user/profile/profile.component";
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -21,11 +21,11 @@ const routes: Routes = [
   {path : '',
     component : PrimaryLayoutComponent,
     children:[
-      {path: 'play',component: CreateAlbumComponent},
       {path:"" , component:HomeComponent},
       {path:"all-albums" , component:ListAlbumsComponent},
-      {path:"albumid" , component:SingleAlbumComponent},
+      {path:"album/:ref" , component:SingleAlbumComponent},
       {path:"all-artists" , component:ListArtistsComponent},
+      {path:"profile", component: ProfileComponent}
 
 
     ]
@@ -34,7 +34,12 @@ const routes: Routes = [
     component : DashLayoutComponent,
     children:[
       {path:"all-users" , component:ListUsersComponent},
-      {path: "add-track", component: AddTrackComponent}
+    ]
+  },
+  {path : '',
+    component : DashLayoutComponent, canActivate:[AuthGuard, GuardRoleGuard],data:{role:'artist'},
+    children:[
+      {path: "add-album", component:CreateAlbumComponent}
     ]
   },
 ];

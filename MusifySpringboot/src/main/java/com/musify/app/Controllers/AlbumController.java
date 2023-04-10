@@ -1,14 +1,16 @@
 package com.musify.app.Controllers;
 
 
+import com.musify.app.Dto.ResponseDto;
+import com.musify.app.Entities.Album;
+import com.musify.app.Entities.Artist;
 import com.musify.app.Entities.HttpResponse;
 import com.musify.app.Services.AlbumService;
+import com.musify.app.Services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -22,6 +24,9 @@ public class AlbumController {
 
     @Autowired
     AlbumService albumService;
+
+    @Autowired
+    ArtistService artistService;
 
 
 
@@ -37,6 +42,37 @@ public class AlbumController {
                         .status(OK)
                         .statusCode(OK.value())
                         .build());
+    }
+
+
+    @PostMapping("/add-album")
+    public ResponseDto addAlbum(@RequestPart("album") Album album,
+                                @RequestParam("email")  String email,
+                                @RequestParam("MyFile")MultipartFile avatar) throws IllegalAccessException {
+        Artist artist = artistService.findByEmail(email);
+        if(artist == null){
+            return new ResponseDto("400","Error with your email.");
+        }
+        System.out.println(avatar.getSize());
+        album.setArtist(artist);
+        return new ResponseDto("200", "album has been added successfully", albumService.saveAlbum(album,avatar));
+
+    }
+
+    @GetMapping("/albums-by-artist/{email}")
+    public ResponseDto getAlbumsByArtist(@PathVariable String email){
+        Artist artist = artistService.findByEmail(email);
+        return new ResponseDto("200", "album retrieved", albumService.getAlbumsByArtist(artist));
+
+    }
+
+    @GetMapping("/get-by-reference/{ref}")
+    public ResponseDto getAlbumByReference(@PathVariable String ref){
+        Album album = albumService.getByReference(ref);
+        if(album==null){
+            return new ResponseDto("400","album not found");
+        }
+        return new ResponseDto("200", "album retrieved successfully", album);
     }
 
 

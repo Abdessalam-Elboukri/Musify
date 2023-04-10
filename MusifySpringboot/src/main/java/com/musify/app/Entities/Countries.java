@@ -16,6 +16,15 @@ public class Countries {
     private String name;
     private String iso;
 
+    public Countries() {
+    }
+
+    public Countries(long id, String name, String iso ) {
+        this.id = id;
+        this.name = name;
+        this.iso = iso;
+    }
+
     @OneToMany(mappedBy = "country")
     private List<UserApp> users = new ArrayList<>();
 
