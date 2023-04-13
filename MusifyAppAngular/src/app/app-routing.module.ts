@@ -13,6 +13,7 @@ import {CreateAlbumComponent} from "./components/album/create-album/create-album
 import {AuthGuard} from "./components/auth/guard.guard";
 import {GuardRoleGuard} from "./components/auth/guard-role.guard";
 import {ProfileComponent} from "./components/user/profile/profile.component";
+import { InfiniteScrollPagiComponent } from './components/infinite-scroll-pagi/infinite-scroll-pagi.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
     component : DashLayoutComponent,
     children:[
       {path:"all-users" , component:ListUsersComponent},
+      {path:"pagi" , component:InfiniteScrollPagiComponent},
     ]
   },
   {path : '',

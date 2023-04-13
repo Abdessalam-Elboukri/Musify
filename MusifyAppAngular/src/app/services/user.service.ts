@@ -19,7 +19,7 @@ export class UserService{
 
 
   //retrieve all users
-  getUsers(userName:string='',page:number=0,size:number=50):Observable<ApiResponse<Page<UserApp>>>{
+  getUsers(userName:string='',page:number=0,size:number=20):Observable<ApiResponse<Page<UserApp>>>{
     return this.http.get<any>(`${this.base_url}/all-users?userName=${userName}&page=${page}&size=${size}`)
   }
 

@@ -30,6 +30,8 @@ import { AddTrackModalComponent } from './components/modals/add-track-modal/add-
 import {AuthInterceptor} from "./components/auth/interceptor.interceptor";
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/artist-sidebar.component';
+import { InfiniteScrollPagiComponent } from './components/infinite-scroll-pagi/infinite-scroll-pagi.component';
+import { MatTableModule } from '@angular/material';
 
 
 
@@ -57,7 +59,8 @@ import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/art
     AddAlbumModalComponent,
     AddTrackModalComponent,
     ProfileComponent,
-    ArtistSidebarComponent
+    ArtistSidebarComponent,
+    InfiniteScrollPagiComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/art
     MatToolbarModule,
     MatSliderModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatTableModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

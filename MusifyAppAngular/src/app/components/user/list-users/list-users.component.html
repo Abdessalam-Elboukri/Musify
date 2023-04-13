@@ -24,7 +24,7 @@
             </div>
           </div>
         </ng-container>
-        <ng-container *ngSwitchCase="'APP_LOADED'">
+        <ng-container *ngSwitchCase="'APP_LOADED'" (scroll)="onScroll()" >
           <h3>User List</h3>
           <table class="table">
             <thead>

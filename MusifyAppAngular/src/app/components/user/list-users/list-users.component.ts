@@ -17,11 +17,16 @@ export class ListUsersComponent implements OnInit {
   responseSubject = new BehaviorSubject<ApiResponse<Page<UserApp>>>(null);
   private currentPageSubject = new BehaviorSubject<number>(0);
   currentPage$ = this.currentPageSubject.asObservable();
+  page=0
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.usersState$ = this.userService.getUsers().pipe(
+    this.loadData()
+  }
+
+  loadData(){
+    this.usersState$ = this.userService.getUsers("",this.page).pipe(
       map((response: ApiResponse<Page<UserApp>>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(response.data.page.number);
@@ -42,7 +47,8 @@ export class ListUsersComponent implements OnInit {
       map((response: ApiResponse<Page<UserApp>>) => {
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
-        console.log(response);
+        //console.log(response);
+        console.log(response.data.page.content)
         return ({ appState: 'APP_LOADED', appData: response });
       }),
       startWith({ appState: 'APP_LOADED', appData: this.responseSubject.value }),
@@ -57,4 +63,9 @@ export class ListUsersComponent implements OnInit {
     this.gotToPage(name, direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
   }
 
+  onScroll() {
+   this.page++;
+   console.log(this.page)
+    this.loadData();
+  }
 }
