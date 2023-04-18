@@ -76,7 +76,7 @@ export class PrimaryNavbarComponent implements OnInit {
   }
 
   play() {
-    this.openFile(this.files[0], 0);
+    //this.openFile(this.files[0], 0);
     this.audioService.play();
   }
 
@@ -97,6 +97,10 @@ export class PrimaryNavbarComponent implements OnInit {
   }
   isPlaying(){
     return this.state.playing == true;
+  }
+
+  lastPlayed(){
+
   }
 
 }

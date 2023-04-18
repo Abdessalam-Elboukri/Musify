@@ -1,10 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-
-declare var $: any;
 import {PrimaryNavbarComponent} from "../navbars/primary-navbar/primary-navbar.component";
 import {AudioService} from "../../services/audio.service";
 import {CloudService} from "../../services/cloud.service";
-
 
 @Component({
   selector: 'app-home',

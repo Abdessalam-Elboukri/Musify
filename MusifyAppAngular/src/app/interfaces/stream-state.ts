@@ -7,4 +7,5 @@ export interface StreamState {
   volume: number | undefined;
   canplay: boolean;
   error: boolean;
+  pausedAt:number | undefined
 }

@@ -40,9 +40,9 @@
             <a href="tracks">View Albums<i class="icon-angle-right ml-3"></i></a>
           </div>
 
-          <div class="row has-items-overlay">
-            <app-track-card  class="col-lg-2 col-md-3 col-sm-6 my-2"
-              *ngFor="let file of files; let i = index " (click)="openFile(file, i)"
+          <div class="d-flex  has-items-overlay scroller g-5">
+            <app-track-card  class=" my-2 mx-2" style="width: 250px"
+                             *ngFor="let file of files; let i = index " (click)="openFile(file, i)"
                              [stateName]="file.name"
                              [stateArtist]="file.artist"
             ></app-track-card>

@@ -14,9 +14,10 @@ export class AudioService {
     readableDuration: '',
     duration: undefined,
     currentTime: undefined,
-    volume: 0.5,
+    volume: 2,
     canplay: false,
     error: false,
+    pausedAt:undefined
   };
   private stop$ = new Subject();
   private audioObj = new Audio();
@@ -50,6 +51,7 @@ export class AudioService {
         break;
       case "pause":
         this.state.playing = false;
+        //this.state.pausedAt=this.audioObj.currentTime
         break;
       case "timeupdate":
         this.state.currentTime = this.audioObj.currentTime;
@@ -72,9 +74,10 @@ export class AudioService {
       readableDuration: '',
       duration: undefined,
       currentTime: undefined,
-      volume: 0.5,
+      volume: 2,
       canplay: false,
-      error: false
+      error: false,
+      pausedAt:undefined
     };
   }
 
@@ -86,7 +89,7 @@ export class AudioService {
     return new Observable(observer => {
       this.audioObj.src = url;
       this.audioObj.load();
-      this.audioObj.play();
+      this.play()
 
       const handler = (event: Event) => {
         this.updateStateEvents(event);
@@ -97,7 +100,7 @@ export class AudioService {
       return () => {
         // Stop Playing
         this.audioObj.pause();
-        this.audioObj.currentTime = 0;
+        this.audioObj.currentTime = 0
         // remove event listeners
         this.removeEvents(this.audioObj, this.audioEvents, handler);
         // reset state
@@ -123,6 +126,9 @@ export class AudioService {
   }
 
   play() {
+    if (this.state.pausedAt !== undefined) {
+      this.audioObj.currentTime = this.state.pausedAt;
+    }
     this.audioObj.play();
   }
 
@@ -146,6 +152,10 @@ export class AudioService {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
   }
+
+
+
+
 
 
 }
