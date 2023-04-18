@@ -89,7 +89,7 @@ export class AudioService {
     return new Observable(observer => {
       this.audioObj.src = url;
       this.audioObj.load();
-      this.play()
+      this.audioObj.play()
 
       const handler = (event: Event) => {
         this.updateStateEvents(event);

@@ -1,15 +1,17 @@
-import { Component, OnInit} from '@angular/core';
-import {ActivatedRouteSnapshot, DetachedRouteHandle, RouteReuseStrategy} from '@angular/router'
-import {AudioService} from "../../../services/audio.service";
-import {CloudService} from "../../../services/cloud.service";
-import {StreamState} from "../../../interfaces/stream-state";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { StreamState } from 'src/app/interfaces/stream-state';
+import { AudioService } from 'src/app/services/audio.service';
+import { CloudService } from 'src/app/services/cloud.service';
+import WaveSurfer from 'wavesurfer.js';
+
 
 @Component({
-  selector: 'app-primary-navbar',
-  templateUrl: './primary-navbar.component.html',
-  styleUrls: ['primary-navbar.component.css']
+  selector: 'app-wavesurfer',
+  templateUrl: './wavesurfer.component.html',
+  styleUrls: ['./wavesurfer.component.css']
 })
-export class PrimaryNavbarComponent implements OnInit {
+export class WavesurferComponent implements OnInit {
+
   files: Array<any> = [];
   state: StreamState | undefined;
   currentFile: any = {};
@@ -31,9 +33,30 @@ export class PrimaryNavbarComponent implements OnInit {
     });
   }
 
+  @ViewChild('waveform') waveformElement: ElementRef;
+  private waveSurfer: WaveSurfer;
+
   ngOnInit(): void {
-   //  this.playStream("https://www.thinknews.com.ng/wp-content/uploads/2021/10/Adele_-_Easy_On_Me_(thinknews.com.ng).mp3")
+
+    // Create WaveSurfer instance
+    this.waveSurfer = WaveSurfer.create({
+      container: this.waveformElement.nativeElement,
+      waveColor: 'violet',
+      progressColor: 'purple',
+      barWidth: 3,
+      cursorWidth: 1
+      // Add more options as needed
+    });
+
+    // Load audio file
+    this.waveSurfer.load('https://www.thinknews.com.ng/wp-content/uploads/2021/10/Adele_-_Easy_On_Me_(thinknews.com.ng).mp3');
   }
+
+
+
+
+    //  this.playStream("https://www.thinknews.com.ng/wp-content/uploads/2021/10/Adele_-_Easy_On_Me_(thinknews.com.ng).mp3")
+
 
   isFirstPlaying() {
     return this.currentFile.index === 0;
@@ -76,9 +99,9 @@ export class PrimaryNavbarComponent implements OnInit {
   }
 
   play() {
+    this.openFile(this.files[0], 0);
     this.audioService.play();
-     let index = this.currentFile.index ;
-    index++
+
   }
 
   stop() {
@@ -103,5 +126,6 @@ export class PrimaryNavbarComponent implements OnInit {
   lastPlayed(){
 
   }
+
 
 }

@@ -14,10 +14,13 @@ import {AuthGuard} from "./components/auth/guard.guard";
 import {GuardRoleGuard} from "./components/auth/guard-role.guard";
 import {ProfileComponent} from "./components/user/profile/profile.component";
 import { InfiniteScrollPagiComponent } from './components/infinite-scroll-pagi/infinite-scroll-pagi.component';
+import { WavesurferComponent } from './components/navbars/wavesurfer/wavesurfer.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"signup", component:SignupComponent},
+
+  {path:"wave", component:WavesurferComponent},
 
   {path : '',
     component : PrimaryLayoutComponent,

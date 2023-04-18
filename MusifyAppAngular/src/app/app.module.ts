@@ -32,7 +32,7 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import { ArtistSidebarComponent } from './components/sidebars/artist-sidebar/artist-sidebar.component';
 import { InfiniteScrollPagiComponent } from './components/infinite-scroll-pagi/infinite-scroll-pagi.component';
 import { MatTableModule } from '@angular/material';
-
+import { WavesurferComponent } from './components/navbars/wavesurfer/wavesurfer.component';
 
 
 @NgModule({
@@ -60,7 +60,9 @@ import { MatTableModule } from '@angular/material';
     AddTrackModalComponent,
     ProfileComponent,
     ArtistSidebarComponent,
-    InfiniteScrollPagiComponent
+    InfiniteScrollPagiComponent,
+    WavesurferComponent,
+
   ],
   imports: [
     BrowserModule,
